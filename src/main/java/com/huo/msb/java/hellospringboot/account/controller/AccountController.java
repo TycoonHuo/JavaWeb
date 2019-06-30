@@ -1,7 +1,15 @@
 package com.huo.msb.java.hellospringboot.account.controller;
 
+import com.huo.msb.java.hellospringboot.account.entity.Account;
+import com.huo.msb.java.hellospringboot.account.resp.RespStat;
+import com.huo.msb.java.hellospringboot.account.service.AccountService;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 跟用户相关的controller
@@ -9,40 +17,36 @@ import org.springframework.web.bind.annotation.*;
  * @author huoyun
  * @date 2019/6/27-23:09
  */
-@Controller
+@RestController
 @RequestMapping("/account")
 public class AccountController {
+    @Autowired
+    private AccountService accountSrv;
 
-    /**
-     * 负责跳转登录页
-     *
-     * @return template login.html
-     */
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+
+    @PostMapping("/regist")
+    public RespStat regist(@RequestBody Account account) {
+
+        return accountSrv.save(account);
     }
 
-    /**
-     * post 请求 登录
-     */
-    @PostMapping("login")
-    @ResponseBody
-    public String loginMethod(@RequestParam("email") String email, @RequestParam("password") String password) {
-        System.out.println("email:" + email);
-        System.out.println("password:" + password);
-        if ("huo@yo.com".equals(email)) {
-            return "ok";
-        } else {
-            return "fail";
-        }
+    @GetMapping("/list")
+    public RespStat list() {
+        return accountSrv.findAll();
     }
 
-    /**
-     * index 页面 跳转
-     */
-    @GetMapping("/index")
-    public String index(){
-        return "index";
+    @GetMapping("/{id}")
+    public RespStat getById(@PathVariable("id") Integer id) {
+        return accountSrv.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public RespStat deleteById(@PathVariable("id") Integer id) {
+        return accountSrv.deleteById(id);
+    }
+
+    @PatchMapping
+    public RespStat editById(@RequestBody Account account){
+        return accountSrv.editById(account);
     }
 }

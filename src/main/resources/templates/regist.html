@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <!-- 在url上 使用 @标签 可以帮我们 自动加上 contextpath -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<a th:href="@{/account/regist}">用户注册</a>
+<a th:href="@{/account/list}">用户列表</a>
+<form method="post" th:action="@{/account/regist}">
+    <div class="form-group">
+        <label for="loginName">用户名</label>
+        <input type="text" name="loginName" class="form-control" id="loginName" placeholder="username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="age">年龄</label>
+        <input type="text" name="age" class="form-control" id="age" placeholder="age">
+    </div>
+    <div class="form-group">
+        <label for="nickName">昵称</label>
+        <input type="text" name="nickName" class="form-control" id="nickName" placeholder="nickName">
+    </div>
+    <div class="form-group">
+        <label for="location">您的位置</label>
+        <input type="text" name="location" class="form-control" id="location" placeholder="location">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</body>
+</html>

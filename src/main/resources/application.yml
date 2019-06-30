@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    password: 123456
+    username: root
+    url: jdbc:mysql://192.168.48.11:3306/javaWeb?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  # mapper配置文件在哪
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  # 实体类包名
+  type-aliases-package: com.huo.msb.java.hellospringboot.account.entity
+logging:
+  level:
+    com:
+      huo:
+        msb:
+          java:
+            hellospringboot:
+              account:
+                mapper:
+                  debug
+#MyBatis显示SQL
