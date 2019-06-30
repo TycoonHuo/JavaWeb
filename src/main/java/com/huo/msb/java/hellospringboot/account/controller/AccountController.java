@@ -49,4 +49,9 @@ public class AccountController {
     public RespStat editById(@RequestBody Account account){
         return accountSrv.editById(account);
     }
+
+    @PostMapping("/login")
+    public RespStat login(@RequestBody Account account){
+        return accountSrv.login(account);
+    }
 }

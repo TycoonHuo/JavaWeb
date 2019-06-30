@@ -18,4 +18,6 @@ public interface AccountMapper {
     Account findById(Integer id);
 
     Integer updateById(Account account);
+
+    Account findByLoginNameAndPassword(Account account);
 }

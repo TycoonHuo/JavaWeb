@@ -9,6 +9,9 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   # 实体类包名
   type-aliases-package: com.huo.msb.java.hellospringboot.account.entity
+
+
+#MyBatis显示SQL  其实就是设置这个包的日志级别
 logging:
   level:
     com:
@@ -19,4 +22,3 @@ logging:
               account:
                 mapper:
                   debug
-#MyBatis显示SQL

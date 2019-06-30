@@ -40,7 +40,7 @@ public class AccountService {
     }
 
     public RespStat deleteById(Integer id) {
-       Integer result = null;
+        Integer result = null;
         try {
             result = mapper.deleteById(id);
         } catch (Exception e) {
@@ -52,8 +52,8 @@ public class AccountService {
     public RespStat findById(Integer id) {
         Account result = null;
         try {
-           result =  mapper.findById(id);
-        }catch (Exception e){
+            result = mapper.findById(id);
+        } catch (Exception e) {
             return RespStat.build(500, e.getMessage(), result);
 
         }
@@ -65,9 +65,21 @@ public class AccountService {
         Integer result = null;
         try {
             result = mapper.updateById(account);
-        }catch (Exception e){
+        } catch (Exception e) {
             return RespStat.build(500, e.getMessage(), result);
         }
-        return RespStat.build(200,"ok",result);
+        return RespStat.build(200, "ok", result);
+    }
+
+    public RespStat login(Account account) {
+        Account result = null;
+        try {
+            result = mapper.findByLoginNameAndPassword(account);
+        } catch (Exception e) {
+            return RespStat.build(500, e.getMessage(), result);
+
+        }
+        return RespStat.build(200, "ok", result);
+
     }
 }

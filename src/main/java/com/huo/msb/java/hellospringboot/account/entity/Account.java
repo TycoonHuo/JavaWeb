@@ -1,6 +1,8 @@
 package com.huo.msb.java.hellospringboot.account.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 实体类 对应Spring data jpa
  *

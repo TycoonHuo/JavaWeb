@@ -43,4 +43,11 @@
             location   = #{location}
         where id = #{id}
     </update>
+
+    <select id="findByLoginNameAndPassword" parameterType="Account" resultMap="account">
+        select id, login_name, age, password, nick_name, location
+        from account
+        where login_name = #{loginName}
+          and password = #{password}
+    </select>
 </mapper>
