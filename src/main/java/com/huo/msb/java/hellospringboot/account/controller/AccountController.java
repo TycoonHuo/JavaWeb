@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -18,21 +19,20 @@ import java.util.List;
  * @date 2019/6/27-23:09
  */
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 public class AccountController {
     @Autowired
     private AccountService accountSrv;
 
 
-    @PostMapping("/regist")
-    public RespStat regist(@RequestBody Account account) {
-
+    @PostMapping("/register")
+    public RespStat register(Account account) {
         return accountSrv.save(account);
     }
 
     @GetMapping("/list")
     public RespStat list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
-        return accountSrv.findAll(page,size);
+        return accountSrv.findAll(page, size);
     }
 
     @GetMapping("/{id}")
@@ -44,15 +44,9 @@ public class AccountController {
     public RespStat deleteById(@PathVariable("id") Integer id) {
         return accountSrv.deleteById(id);
     }
-//
-//    @PatchMapping
-//    public RespStat editById(@RequestBody Account account){
-//        return accountSrv.editById(account);
-//    }
-//
-    @PostMapping("/login")
-    public RespStat login(@RequestBody Account account){
-        return accountSrv.login(account);
-    }
 
+    @PostMapping("/login")
+    public RespStat login(Account account, HttpServletRequest request) {
+        return accountSrv.login(account,request);
+    }
 }

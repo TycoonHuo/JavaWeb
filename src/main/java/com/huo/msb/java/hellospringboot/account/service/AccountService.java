@@ -10,6 +10,7 @@ import com.huo.msb.java.hellospringboot.account.resp.RespStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -68,18 +69,15 @@ public class AccountService {
 
     }
 
-    //
-//    public RespStat editById(Account account) {
-//        Integer result = null;
-//        try {
-//            result = mapper.updateById(account);
-//        } catch (Exception e) {
-//            return RespStat.build(500, e.getMessage(), result);
-//        }
-//        return RespStat.build(200, "ok", result);
-//    }
-//
-    public RespStat login(Account account) {
+
+    /**
+     * 用户登录
+     *
+     * @param account 前端表单数据
+     * @param request
+     * @return 返回状态信息
+     */
+    public RespStat login(Account account, HttpServletRequest request) {
         Account result = null;
         AccountExample accountExample = new AccountExample();
         accountExample.createCriteria().andLoginNameEqualTo(account.getLoginName()).andPasswordEqualTo(account.getPassword());
@@ -94,6 +92,7 @@ public class AccountService {
             return RespStat.build(500, e.getMessage(), result);
 
         }
+        request.getSession().setAttribute("account", result);
         return RespStat.build(200, "ok", result);
 
     }
