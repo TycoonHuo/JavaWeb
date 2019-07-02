@@ -40,13 +40,18 @@ public class AccountController {
         return accountSrv.findById(id);
     }
 
-    @DeleteMapping("/{id}")
-    public RespStat deleteById(@PathVariable("id") Integer id) {
-        return accountSrv.deleteById(id);
-    }
+//    @DeleteMapping("/{id}")
+//    public RespStat deleteById(@PathVariable("id") Integer id) {
+//        return accountSrv.deleteById(id);
+//    }
 
     @PostMapping("/login")
     public RespStat login(Account account, HttpServletRequest request) {
         return accountSrv.login(account,request);
+    }
+
+    @PostMapping("/deleteById")
+    public RespStat deleteById(Integer id){
+        return accountSrv.deleteById(id);
     }
 }
