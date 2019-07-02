@@ -1,6 +1,8 @@
 package com.huo.msb.java.hellospringboot.account.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.huo.msb.java.hellospringboot.account.entity.Account;
 import com.huo.msb.java.hellospringboot.account.entity.AccountExample;
 import com.huo.msb.java.hellospringboot.account.mapper.AccountDAO;
@@ -36,19 +38,12 @@ public class AccountService {
 
     public RespStat findAll(Integer page, Integer size) {
         AccountExample accountExample = new AccountExample();
-        List<Account> all = null;
-        if (page == null && size == null) {
-            // 默认就是查所有
-//        accountExample.createCriteria().;
-            all = accountDAO.selectByExample(accountExample);
-            return RespStat.build(200, "success", all);
-        }
-
         // 分页查询
         PageHelper.startPage(page, size);
-        all = accountDAO.selectByExample(accountExample);
-        return RespStat.build(200, "success", all);
+        List<Account> all = accountDAO.selectByExample(accountExample);
+        PageInfo pageInfo = new PageInfo(all);
 
+        return RespStat.build(200, "success", pageInfo);
     }
 
     public RespStat deleteById(Integer id) {

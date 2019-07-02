@@ -31,8 +31,8 @@ public class AccountController {
     }
 
     @GetMapping("/list")
-    public RespStat list() {
-        return accountSrv.findAll();
+    public RespStat list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+        return accountSrv.findAll(page,size);
     }
 
     @GetMapping("/{id}")
@@ -44,14 +44,15 @@ public class AccountController {
     public RespStat deleteById(@PathVariable("id") Integer id) {
         return accountSrv.deleteById(id);
     }
-
-    @PatchMapping
-    public RespStat editById(@RequestBody Account account){
-        return accountSrv.editById(account);
-    }
-
+//
+//    @PatchMapping
+//    public RespStat editById(@RequestBody Account account){
+//        return accountSrv.editById(account);
+//    }
+//
     @PostMapping("/login")
     public RespStat login(@RequestBody Account account){
         return accountSrv.login(account);
     }
+
 }
