@@ -1,7 +1,6 @@
 package com.huo.msb.java.hellospringboot.account.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.huo.msb.java.hellospringboot.account.entity.Account;
 import com.huo.msb.java.hellospringboot.account.resp.RespStat;
 import com.huo.msb.java.hellospringboot.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 做页面的跳转
@@ -38,9 +35,9 @@ public class AccountPageController {
         return "/account/login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/add")
     public String register() {
-        return "/account/register";
+        return "/account/add";
     }
 
     @GetMapping("/logout")
@@ -53,7 +50,12 @@ public class AccountPageController {
     public String list(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
         RespStat all = accountService.findAll(pageNum, pageSize);
         PageInfo pageInfo = (PageInfo) all.getData();
-        model.addAttribute("accountList",pageInfo.getList());
+        model.addAttribute("accountList",pageInfo);
         return "/account/list";
+    }
+
+    @GetMapping("/info")
+    public String info(){
+        return "/account/info";
     }
 }

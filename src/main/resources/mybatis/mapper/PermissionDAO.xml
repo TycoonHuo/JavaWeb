@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huo.msb.java.hellospringboot.account.mapper.AccountDAO">
-  <resultMap id="BaseResultMap" type="com.huo.msb.java.hellospringboot.account.entity.Account">
+<mapper namespace="com.huo.msb.java.hellospringboot.account.mapper.PermissionDAO">
+  <resultMap id="BaseResultMap" type="com.huo.msb.java.hellospringboot.account.entity.Permission">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="uri" jdbcType="VARCHAR" property="uri" />
+    <result column="c" jdbcType="BIT" property="c" />
+    <result column="r" jdbcType="BIT" property="r" />
+    <result column="u" jdbcType="BIT" property="u" />
+    <result column="d" jdbcType="BIT" property="d" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, login_name, `password`, icon
+    id, uri, `c`, r, u, d, `name`
   </sql>
-  <select id="selectByExample" parameterType="com.huo.msb.java.hellospringboot.account.mapper.AccountExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.huo.msb.java.hellospringboot.account.mapper.PermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from account
+    from permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,70 +88,97 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from account
+    from permission
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from account
+    delete from permission
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.huo.msb.java.hellospringboot.account.mapper.AccountExample">
-    delete from account
+  <delete id="deleteByExample" parameterType="com.huo.msb.java.hellospringboot.account.mapper.PermissionExample">
+    delete from permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huo.msb.java.hellospringboot.account.entity.Account" useGeneratedKeys="true">
-    insert into account (login_name, `password`, icon
-      )
-    values (#{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}
-      )
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huo.msb.java.hellospringboot.account.entity.Permission" useGeneratedKeys="true">
+    insert into permission (uri, `c`, r, u, 
+      d, `name`)
+    values (#{uri,jdbcType=VARCHAR}, #{c,jdbcType=BIT}, #{r,jdbcType=BIT}, #{u,jdbcType=BIT}, 
+      #{d,jdbcType=BIT}, #{name,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huo.msb.java.hellospringboot.account.entity.Account" useGeneratedKeys="true">
-    insert into account
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huo.msb.java.hellospringboot.account.entity.Permission" useGeneratedKeys="true">
+    insert into permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="loginName != null">
-        login_name,
+      <if test="uri != null">
+        uri,
       </if>
-      <if test="password != null">
-        `password`,
+      <if test="c != null">
+        `c`,
       </if>
-      <if test="icon != null">
-        icon,
+      <if test="r != null">
+        r,
+      </if>
+      <if test="u != null">
+        u,
+      </if>
+      <if test="d != null">
+        d,
+      </if>
+      <if test="name != null">
+        `name`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="loginName != null">
-        #{loginName,jdbcType=VARCHAR},
+      <if test="uri != null">
+        #{uri,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="c != null">
+        #{c,jdbcType=BIT},
       </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
+      <if test="r != null">
+        #{r,jdbcType=BIT},
+      </if>
+      <if test="u != null">
+        #{u,jdbcType=BIT},
+      </if>
+      <if test="d != null">
+        #{d,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.huo.msb.java.hellospringboot.account.mapper.AccountExample" resultType="java.lang.Long">
-    select count(*) from account
+  <select id="countByExample" parameterType="com.huo.msb.java.hellospringboot.account.mapper.PermissionExample" resultType="java.lang.Long">
+    select count(*) from permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update account
+    update permission
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.loginName != null">
-        login_name = #{record.loginName,jdbcType=VARCHAR},
+      <if test="record.uri != null">
+        uri = #{record.uri,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        `password` = #{record.password,jdbcType=VARCHAR},
+      <if test="record.c != null">
+        `c` = #{record.c,jdbcType=BIT},
       </if>
-      <if test="record.icon != null">
-        icon = #{record.icon,jdbcType=VARCHAR},
+      <if test="record.r != null">
+        r = #{record.r,jdbcType=BIT},
+      </if>
+      <if test="record.u != null">
+        u = #{record.u,jdbcType=BIT},
+      </if>
+      <if test="record.d != null">
+        d = #{record.d,jdbcType=BIT},
+      </if>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -156,35 +186,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update account
+    update permission
     set id = #{record.id,jdbcType=INTEGER},
-      login_name = #{record.loginName,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=VARCHAR},
-      icon = #{record.icon,jdbcType=VARCHAR}
+      uri = #{record.uri,jdbcType=VARCHAR},
+      `c` = #{record.c,jdbcType=BIT},
+      r = #{record.r,jdbcType=BIT},
+      u = #{record.u,jdbcType=BIT},
+      d = #{record.d,jdbcType=BIT},
+      `name` = #{record.name,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huo.msb.java.hellospringboot.account.entity.Account">
-    update account
+  <update id="updateByPrimaryKeySelective" parameterType="com.huo.msb.java.hellospringboot.account.entity.Permission">
+    update permission
     <set>
-      <if test="loginName != null">
-        login_name = #{loginName,jdbcType=VARCHAR},
+      <if test="uri != null">
+        uri = #{uri,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
+      <if test="c != null">
+        `c` = #{c,jdbcType=BIT},
       </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
+      <if test="r != null">
+        r = #{r,jdbcType=BIT},
+      </if>
+      <if test="u != null">
+        u = #{u,jdbcType=BIT},
+      </if>
+      <if test="d != null">
+        d = #{d,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huo.msb.java.hellospringboot.account.entity.Account">
-    update account
-    set login_name = #{loginName,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.huo.msb.java.hellospringboot.account.entity.Permission">
+    update permission
+    set uri = #{uri,jdbcType=VARCHAR},
+      `c` = #{c,jdbcType=BIT},
+      r = #{r,jdbcType=BIT},
+      u = #{u,jdbcType=BIT},
+      d = #{d,jdbcType=BIT},
+      `name` = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

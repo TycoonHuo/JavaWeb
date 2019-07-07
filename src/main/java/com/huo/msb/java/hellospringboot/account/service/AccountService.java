@@ -1,11 +1,10 @@
 package com.huo.msb.java.hellospringboot.account.service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.huo.msb.java.hellospringboot.account.entity.Account;
-import com.huo.msb.java.hellospringboot.account.entity.AccountExample;
 import com.huo.msb.java.hellospringboot.account.mapper.AccountDAO;
+import com.huo.msb.java.hellospringboot.account.mapper.AccountExample;
 import com.huo.msb.java.hellospringboot.account.resp.RespStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
