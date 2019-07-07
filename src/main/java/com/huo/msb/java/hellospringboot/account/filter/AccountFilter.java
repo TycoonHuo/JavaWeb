@@ -16,7 +16,7 @@ import java.io.IOException;
 @WebFilter
 public class AccountFilter implements Filter {
 
-    private final static String[] INGORE_URIS = {"/account/index", "/account/login", "/account/register", "/favicon.ico","/api/account/login"};
+    private final static String[] INGORE_URIS = {"/js","/css","/account/index", "/account/login", "/favicon.ico","/api/account/login"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -41,7 +41,6 @@ public class AccountFilter implements Filter {
         }
 
     }
-
 
     /**
      * @param uri 校验的uri
